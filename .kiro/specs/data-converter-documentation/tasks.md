@@ -75,7 +75,7 @@ Data Converter Siteの実装タスクリストです。日時変換機能とカ�
     - `src/components/LanguageSwitcher.tsx`を作成
     - ロケール切り替えとブラウザストレージへの保存を実装
     - _Requirements: 11.3, 11.4, 11.5_
-  - [ ]\* 3.4 言語切り替えのプロパティテストを作成
+  - [x] 3.4 言語切り替えのプロパティテストを作成
     - **Property 14: 言語切り替えの一貫性**
     - **Property 15: 言語設定の永続化**
     - **Validates: Requirements 11.4, 11.5, 11.7, 11.8**
