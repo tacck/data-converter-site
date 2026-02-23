@@ -71,7 +71,7 @@ Data Converter Siteの実装タスクリストです。日時変換機能とカ�
     - `src/components/Button.tsx`を作成
     - バリアント(primary, secondary)とアクセシビリティ対応を実装
     - _Requirements: 8.2, 8.6_
-  - [ ] 3.3 言語切り替えコンポーネントの作成
+  - [x] 3.3 言語切り替えコンポーネントの作成
     - `src/components/LanguageSwitcher.tsx`を作成
     - ロケール切り替えとブラウザストレージへの保存を実装
     - _Requirements: 11.3, 11.4, 11.5_
