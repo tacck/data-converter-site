@@ -143,3 +143,18 @@ Data Converter Siteは、シンプルなデータ変換機能を提供するWeb�
 3. THE System SHALL クライアントサイドで変換処理を実行する
 4. THE System SHALL 不要な再レンダリングを避けるためにReactのメモ化を使用する
 5. THE System SHALL Next.jsのApp Routerによる最適化を活用する
+
+### 要件11: 国際化対応
+
+**ユーザーストーリー:** 世界中のユーザーとして、自分の言語でアプリケーションを使用したい。
+
+#### 受入基準
+
+1. THE System SHALL 英語を標準言語として提供する
+2. THE System SHALL 日本語への切り替えを提供する
+3. THE System SHALL ヘッダーに言語切り替えUIを配置する
+4. WHEN ユーザーが言語を切り替える, THEN THE System SHALL すべてのUIテキストを選択された言語で表示する
+5. THE System SHALL ユーザーの言語選択をブラウザに保存する
+6. THE System SHALL 将来的に他言語の追加が容易な設計を持つ
+7. THE System SHALL 日時形式を言語に応じて適切に表示する
+8. THE System SHALL エラーメッセージを選択された言語で表示する
