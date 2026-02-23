@@ -56,7 +56,7 @@ Data Converter Siteの実装タスクリストです。日時変換機能とカ�
     - `src/messages/en.json`と`src/messages/ja.json`を作成
     - 共通UI、日時変換、カラー変換、エラーメッセージの翻訳を追加
     - _Requirements: 11.1, 11.2, 11.4, 11.8_
-  - [ ] 2.3 ロケールベースのルーティング構造を実装
+  - [x] 2.3 ロケールベースのルーティング構造を実装
     - `src/app/[locale]/layout.tsx`を作成
     - `src/app/[locale]/page.tsx`を作成
     - next-intlのプロバイダーを設定
