@@ -3,6 +3,9 @@
 import { usePathname, useRouter } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import { routing } from "@/i18n/routing";
+import { useEffect } from "react";
+
+const LOCALE_STORAGE_KEY = "preferred-locale";
 
 export function LanguageSwitcher() {
   const t = useTranslations("common");
@@ -10,7 +13,37 @@ export function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
 
+  // マウント時にlocalStorageから保存された言語設定を読み込む
+  useEffect(() => {
+    try {
+      const savedLocale = localStorage.getItem(LOCALE_STORAGE_KEY);
+
+      // 保存されたロケールが有効で、現在のロケールと異なる場合は切り替え
+      if (
+        savedLocale &&
+        routing.locales.includes(
+          savedLocale as (typeof routing.locales)[number],
+        ) &&
+        savedLocale !== locale
+      ) {
+        router.replace(pathname, { locale: savedLocale });
+      }
+    } catch (error) {
+      // localStorageが利用できない環境（プライベートブラウジングなど）への対応
+      console.warn("Failed to load locale from localStorage:", error);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // マウント時のみ実行
+
   const handleLocaleChange = (newLocale: string) => {
+    try {
+      // localStorageに選択された言語を保存
+      localStorage.setItem(LOCALE_STORAGE_KEY, newLocale);
+    } catch (error) {
+      // localStorageが利用できない環境への対応
+      console.warn("Failed to save locale to localStorage:", error);
+    }
+
     router.replace(pathname, { locale: newLocale });
   };
 
