@@ -1,0 +1,92 @@
+{
+  "common": {
+    "siteName": "データ変換サイト",
+    "home": "ホーム",
+    "datetime": "日時変換",
+    "color": "カラー変換",
+    "language": "言語"
+  },
+  "home": {
+    "title": "データ変換サイト",
+    "description": "開発者とデザイナーのためのシンプルなデータ変換ツール",
+    "datetimeCard": {
+      "title": "日時変換",
+      "description": "人間が読める日時形式とUnix Timeを相互変換"
+    },
+    "colorCard": {
+      "title": "カラーコード変換",
+      "description": "様々なカラーフォーマット間の変換とリアルタイムプレビュー"
+    }
+  },
+  "datetime": {
+    "title": "日時変換",
+    "toUnixTime": "日時からUnix Timeへ",
+    "fromUnixTime": "Unix Timeから日時へ",
+    "inputLabel": "入力",
+    "outputLabel": "出力",
+    "datetimeInput": "日時",
+    "unixTimeInput": "Unix Time",
+    "timezone": "タイムゾーン",
+    "unit": "単位",
+    "format": "形式",
+    "seconds": "秒",
+    "milliseconds": "ミリ秒",
+    "standard": "標準形式 (YYYY/mm/DD HH:MM:SS)",
+    "iso": "ISO 8601",
+    "convert": "変換",
+    "placeholder": {
+      "datetime": "2024/01/01 12:00:00",
+      "unixTime": "1704067200"
+    },
+    "description": {
+      "toUnixTime": "人間が読める日時形式をUnix Time(エポックタイム)に変換",
+      "fromUnixTime": "Unix Timeを人間が読める日時形式に変換"
+    }
+  },
+  "color": {
+    "title": "カラーコード変換",
+    "preview": "カラープレビュー",
+    "format": "形式",
+    "rgb": "RGB",
+    "argb": "ARGB",
+    "hex": "HEX",
+    "cmyk": "CMYK",
+    "hsl": "HSL",
+    "red": "赤",
+    "green": "緑",
+    "blue": "青",
+    "alpha": "透明度",
+    "cyan": "シアン",
+    "magenta": "マゼンタ",
+    "yellow": "イエロー",
+    "key": "キー(黒)",
+    "hue": "色相",
+    "saturation": "彩度",
+    "lightness": "明度",
+    "copyCSS": "CSSとしてコピー",
+    "copied": "コピーしました!",
+    "convert": "変換",
+    "placeholder": {
+      "rgb": "0-255",
+      "alpha": "0-255",
+      "hex": "#FF0000 または #AARRGGBB",
+      "cmyk": "0-100",
+      "hue": "0-360",
+      "percent": "0-100"
+    },
+    "description": "RGB、ARGB、HEX、CMYK、HSL形式間でカラーコードを変換"
+  },
+  "errors": {
+    "invalidDateTime": "無効な日時形式です。YYYY/mm/DD HH:MM:SS形式またはISO 8601形式で入力してください。",
+    "invalidUnixTime": "無効なUnix Time値です。数値を入力してください。",
+    "invalidColor": "無効なカラー値です。",
+    "invalidRGB": "RGB値は0から255の範囲で入力してください。",
+    "invalidAlpha": "透明度は0から255の範囲で入力してください。",
+    "invalidHex": "無効なHEX形式です。#RRGGBBまたは#AARRGGBB形式で入力してください。",
+    "invalidCMYK": "CMYK値は0から100の範囲で入力してください。",
+    "invalidHSL": "色相は0-360、彩度と明度は0-100の範囲で入力してください。",
+    "conversionError": "変換中にエラーが発生しました。入力値を確認してください。",
+    "systemError": "予期しないエラーが発生しました。ページを再読み込みしてください。",
+    "copyError": "クリップボードへのコピーに失敗しました。"
+  }
+}

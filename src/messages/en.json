@@ -1,0 +1,92 @@
+{
+  "common": {
+    "siteName": "Data Converter Site",
+    "home": "Home",
+    "datetime": "DateTime",
+    "color": "Color",
+    "language": "Language"
+  },
+  "home": {
+    "title": "Data Converter Site",
+    "description": "Simple data conversion tools for developers and designers",
+    "datetimeCard": {
+      "title": "DateTime Converter",
+      "description": "Convert between human-readable datetime and Unix Time"
+    },
+    "colorCard": {
+      "title": "Color Code Converter",
+      "description": "Convert between various color formats with live preview"
+    }
+  },
+  "datetime": {
+    "title": "DateTime Converter",
+    "toUnixTime": "DateTime to Unix Time",
+    "fromUnixTime": "Unix Time to DateTime",
+    "inputLabel": "Input",
+    "outputLabel": "Output",
+    "datetimeInput": "DateTime",
+    "unixTimeInput": "Unix Time",
+    "timezone": "Timezone",
+    "unit": "Unit",
+    "format": "Format",
+    "seconds": "Seconds",
+    "milliseconds": "Milliseconds",
+    "standard": "Standard (YYYY/mm/DD HH:MM:SS)",
+    "iso": "ISO 8601",
+    "convert": "Convert",
+    "placeholder": {
+      "datetime": "2024/01/01 12:00:00",
+      "unixTime": "1704067200"
+    },
+    "description": {
+      "toUnixTime": "Convert human-readable datetime to Unix Time (epoch time)",
+      "fromUnixTime": "Convert Unix Time to human-readable datetime format"
+    }
+  },
+  "color": {
+    "title": "Color Code Converter",
+    "preview": "Color Preview",
+    "format": "Format",
+    "rgb": "RGB",
+    "argb": "ARGB",
+    "hex": "HEX",
+    "cmyk": "CMYK",
+    "hsl": "HSL",
+    "red": "Red",
+    "green": "Green",
+    "blue": "Blue",
+    "alpha": "Alpha",
+    "cyan": "Cyan",
+    "magenta": "Magenta",
+    "yellow": "Yellow",
+    "key": "Key (Black)",
+    "hue": "Hue",
+    "saturation": "Saturation",
+    "lightness": "Lightness",
+    "copyCSS": "Copy as CSS",
+    "copied": "Copied!",
+    "convert": "Convert",
+    "placeholder": {
+      "rgb": "0-255",
+      "alpha": "0-255",
+      "hex": "#FF0000 or #AARRGGBB",
+      "cmyk": "0-100",
+      "hue": "0-360",
+      "percent": "0-100"
+    },
+    "description": "Convert between RGB, ARGB, HEX, CMYK, and HSL color formats"
+  },
+  "errors": {
+    "invalidDateTime": "Invalid datetime format. Please use YYYY/mm/DD HH:MM:SS or ISO 8601 format.",
+    "invalidUnixTime": "Invalid Unix Time value. Please enter a number.",
+    "invalidColor": "Invalid color value.",
+    "invalidRGB": "RGB values must be between 0 and 255.",
+    "invalidAlpha": "Alpha value must be between 0 and 255.",
+    "invalidHex": "Invalid HEX format. Please use #RRGGBB or #AARRGGBB format.",
+    "invalidCMYK": "CMYK values must be between 0 and 100.",
+    "invalidHSL": "Hue must be 0-360, Saturation and Lightness must be 0-100.",
+    "conversionError": "An error occurred during conversion. Please check your input.",
+    "systemError": "An unexpected error occurred. Please reload the page.",
+    "copyError": "Failed to copy to clipboard."
+  }
+}
