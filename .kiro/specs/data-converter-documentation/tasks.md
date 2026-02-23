@@ -63,11 +63,11 @@ Data Converter Siteの実装タスクリストです。日時変換機能とカ�
     - _Requirements: 11.3, 11.4_
 
 - [ ] 3. 共通コンポーネントの実装
-  - [ ] 3.1 入力フィールドコンポーネントの作成
+  - [x] 3.1 入力フィールドコンポーネントの作成
     - `src/components/InputField.tsx`を作成
     - ラベル、エラー表示、アクセシビリティ属性を実装
     - _Requirements: 8.1, 8.5, 9.2, 9.3_
-  - [ ] 3.2 ボタンコンポーネントの作成
+  - [-] 3.2 ボタンコンポーネントの作成
     - `src/components/Button.tsx`を作成
     - バリアント(primary, secondary)とアクセシビリティ対応を実装
     - _Requirements: 8.2, 8.6_
