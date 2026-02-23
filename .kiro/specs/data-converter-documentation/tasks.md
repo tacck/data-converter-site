@@ -7,7 +7,7 @@ Data Converter Siteの実装タスクリストです。日時変換機能とカ�
 ## タスク
 
 - [ ] 1. プロジェクト基盤とユーティリティ関数の実装
-  - [-] 1.1 日時変換ユーティリティ関数の実装
+  - [x] 1.1 日時変換ユーティリティ関数の実装
     - `src/lib/datetime-utils.ts`を作成
     - `parseDateTime`, `toUnixTime`, `fromUnixTime`, `formatDateTime`, `validateDateTime`関数を実装
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 2.1, 2.2, 2.3, 2.4, 2.5_
