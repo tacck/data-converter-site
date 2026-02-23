@@ -11,7 +11,7 @@ Data Converter Siteの実装タスクリストです。日時変換機能とカ�
     - `src/lib/datetime-utils.ts`を作成
     - `parseDateTime`, `toUnixTime`, `fromUnixTime`, `formatDateTime`, `validateDateTime`関数を実装
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 2.1, 2.2, 2.3, 2.4, 2.5_
-  - [ ] 1.2 日時変換ユーティリティのプロパティテストを作成
+  - [x] 1.2 日時変換ユーティリティのプロパティテストを作成
     - **Property 1: 日時からUnix Timeへの変換の正確性**
     - **Property 2: Unix Timeから日時への変換の正確性**
     - **Property 3: 日時変換のラウンドトリップ**
