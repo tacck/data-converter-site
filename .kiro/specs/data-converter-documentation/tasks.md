@@ -27,7 +27,7 @@ Data Converter Siteの実装タスクリストです。日時変換機能とカ�
     - `src/lib/color-utils.ts`を作成
     - `rgbToHex`, `hexToRgb`, `rgbToCmyk`, `cmykToRgb`, `rgbToHsl`, `hslToRgb`, `validateColorValue`, `formatCss`関数を実装
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.6, 4.1, 4.2, 4.3, 4.4, 5.2, 5.3, 5.4, 5.5_
-  - [ ]\* 1.5 カラー変換ユーティリティのプロパティテストを作成
+  - [x] 1.5 カラー変換ユーティリティのプロパティテストを作成
     - **Property 5: RGB-HEX変換のラウンドトリップ**
     - **Property 6: ARGB-HEX変換のラウンドトリップ**
     - **Property 7: RGB-CMYK変換のラウンドトリップ**
