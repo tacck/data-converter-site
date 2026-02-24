@@ -29,7 +29,7 @@ const rgbValueArbitrary = fc.integer({ min: 0, max: 255 });
 const hueArbitrary = fc.integer({ min: 0, max: 360 });
 
 // カスタムアービトラリ: HSL Saturation/Lightness値 (0-100%)
-const slArbitrary = fc.float({ min: 0, max: 100 });
+const slArbitrary = fc.float({ min: 0, max: 100, noNaN: true });
 
 describe("Color Converter - Property Based Tests", () => {
   // Feature: data-converter-documentation, Property 5: RGB-HEX変換のラウンドトリップ

@@ -153,6 +153,7 @@ describe("Color Utilities - Unit Tests", () => {
       });
 
       it("nullの場合nullを返す", () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         expect(hexToRgb(null as any)).toBeNull();
       });
     });
@@ -270,6 +271,7 @@ describe("Color Utilities - Unit Tests", () => {
 
       it("サポートされていない形式の場合エラーをスローする", () => {
         expect(() =>
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           formatCss({ rgb: { r: 0, g: 0, b: 0 } }, "invalid" as any),
         ).toThrow("Unsupported CSS format: invalid");
       });

@@ -129,7 +129,9 @@ describe("DateTimeUtils - Unit Tests", () => {
     });
 
     it("null/undefinedを拒否する", () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result1 = parseDateTime(null as any, "standard");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result2 = parseDateTime(undefined as any, "standard");
       expect(result1).toBeNull();
       expect(result2).toBeNull();
@@ -189,15 +191,18 @@ describe("DateTimeUtils - Unit Tests", () => {
     });
 
     it("文字列を拒否する", () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect(() => fromUnixTime("invalid" as any, "seconds")).toThrow(
         "Invalid timestamp",
       );
     });
 
     it("null/undefinedを拒否する", () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect(() => fromUnixTime(null as any, "seconds")).toThrow(
         "Invalid timestamp",
       );
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect(() => fromUnixTime(undefined as any, "seconds")).toThrow(
         "Invalid timestamp",
       );
@@ -245,6 +250,7 @@ describe("DateTimeUtils - Unit Tests", () => {
     it("サポートされていないフォーマットを適切に処理する", () => {
       // TypeScriptの型システムで防がれるが、実行時の動作を確認
       const date = new Date("2024-01-01T00:00:00Z");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result = formatDateTime(date, "invalid" as any, "UTC");
       // 実装では'iso'以外はすべてstandard扱いになる
       expect(result).toMatch(/^\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}$/);

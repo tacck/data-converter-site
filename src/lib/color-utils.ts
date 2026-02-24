@@ -349,11 +349,24 @@ export function formatCss(
       if (!color.rgb) {
         throw new Error("RGB values are required for rgb format");
       }
+      // NaNチェック
+      if (isNaN(color.rgb.r) || isNaN(color.rgb.g) || isNaN(color.rgb.b)) {
+        throw new Error("Invalid RGB values: NaN detected");
+      }
       return `rgb(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b})`;
 
     case "rgba":
       if (!color.argb) {
         throw new Error("ARGB values are required for rgba format");
+      }
+      // NaNチェック
+      if (
+        isNaN(color.argb.a) ||
+        isNaN(color.argb.r) ||
+        isNaN(color.argb.g) ||
+        isNaN(color.argb.b)
+      ) {
+        throw new Error("Invalid ARGB values: NaN detected");
       }
       // Alpha値を0-1の範囲に正規化
       const alpha = Math.round((color.argb.a / 255) * 100) / 100;
@@ -368,6 +381,10 @@ export function formatCss(
     case "hsl":
       if (!color.hsl) {
         throw new Error("HSL values are required for hsl format");
+      }
+      // NaNチェック
+      if (isNaN(color.hsl.h) || isNaN(color.hsl.s) || isNaN(color.hsl.l)) {
+        throw new Error("Invalid HSL values: NaN detected");
       }
       return `hsl(${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%)`;
 

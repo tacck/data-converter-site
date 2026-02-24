@@ -42,11 +42,6 @@ const unitArbitrary = fc.constantFrom(
   "milliseconds",
 ) as fc.Arbitrary<"seconds" | "milliseconds">;
 
-// カスタムアービトラリ: 日時フォーマット
-const formatArbitrary = fc.constantFrom("standard", "iso") as fc.Arbitrary<
-  "standard" | "iso"
->;
-
 describe("DateTime Converter - Property Based Tests", () => {
   // Feature: data-converter-documentation, Property 1: 日時からUnix Timeへの変換の正確性
   describe("Property 1: 日時からUnix Timeへの変換の正確性", () => {
