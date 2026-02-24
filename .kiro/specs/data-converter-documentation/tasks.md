@@ -79,7 +79,7 @@ Data Converter Siteの実装タスクリストです。日時変換機能とカ�
     - **Property 14: 言語切り替えの一貫性**
     - **Property 15: 言語設定の永続化**
     - **Validates: Requirements 11.4, 11.5, 11.7, 11.8**
-  - [ ] 3.5 ナビゲーションコンポーネントの作成
+  - [x] 3.5 ナビゲーションコンポーネントの作成
     - `src/components/Navigation.tsx`を作成
     - ホーム、日時変換、カラー変換へのリンクを実装
     - _Requirements: 6.3_
