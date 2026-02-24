@@ -15,8 +15,15 @@ const config = {
     '!src/**/*.spec.{ts,tsx}',
   ],
   transformIgnorePatterns: [
-    'node_modules/(?!(next-intl|use-intl)/)',
+    '/node_modules/(?!(next-intl|use-intl)/)',
   ],
+  transform: {
+    '^.+\\.(ts|tsx)$': ['ts-jest', {
+      tsconfig: {
+        jsx: 'react',
+      },
+    }],
+  },
 };
 
 module.exports = config;
