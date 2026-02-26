@@ -49,13 +49,18 @@ export function LanguageSwitcher() {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-sm text-zinc-600 dark:text-zinc-400">
+      <label
+        htmlFor="language-select"
+        className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400"
+      >
         {t("language")}:
-      </span>
+      </label>
       <select
+        id="language-select"
         value={locale}
         onChange={(e) => handleLocaleChange(e.target.value)}
-        className="rounded border border-zinc-300 bg-white px-2 py-1 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50"
+        aria-label={t("language")}
+        className="rounded border border-zinc-300 bg-white px-2 py-1 text-xs sm:text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50 dark:focus:ring-offset-zinc-900"
       >
         {routing.locales.map((loc) => (
           <option key={loc} value={loc}>

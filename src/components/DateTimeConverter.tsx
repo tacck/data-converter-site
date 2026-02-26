@@ -16,11 +16,6 @@ import {
 } from "@/lib/validation-utils";
 
 /**
- * 日時変換の方向
- */
-type ConversionDirection = "toUnix" | "fromUnix";
-
-/**
  * 日時変換コンポーネントの状態
  */
 interface DateTimeState {
@@ -97,10 +92,12 @@ export function DateTimeConverter() {
         unixTimeInput: unixTime.toString(),
         datetimeError: null,
       }));
-    } catch (error) {
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : tErrors("conversionError");
       setState((prev) => ({
         ...prev,
-        datetimeError: tErrors("conversionError"),
+        datetimeError: errorMessage,
         unixTimeInput: "",
       }));
     }
@@ -138,10 +135,12 @@ export function DateTimeConverter() {
         datetimeInput: formatted,
         unixTimeError: null,
       }));
-    } catch (error) {
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : tErrors("conversionError");
       setState((prev) => ({
         ...prev,
-        unixTimeError: tErrors("conversionError"),
+        unixTimeError: errorMessage,
         datetimeInput: "",
       }));
     }
@@ -154,19 +153,19 @@ export function DateTimeConverter() {
   const handleDateTimeChange = useCallback(
     (value: string) => {
       // リアルタイムバリデーション
-      let error: string | null = null;
+      let errorMessage: string | null = null;
 
       if (value.trim() !== "") {
         const validation = validateDateTimeInput(value, state.format);
         if (!validation.isValid) {
-          error = validation.errorMessage;
+          errorMessage = validation.errorMessage;
         }
       }
 
       setState((prev) => ({
         ...prev,
         datetimeInput: value,
-        datetimeError: error,
+        datetimeError: errorMessage,
       }));
     },
     [state.format],
@@ -179,19 +178,19 @@ export function DateTimeConverter() {
   const handleUnixTimeChange = useCallback(
     (value: string) => {
       // リアルタイムバリデーション
-      let error: string | null = null;
+      let errorMessage: string | null = null;
 
       if (value.trim() !== "") {
         const validation = validateUnixTimeInput(value, state.unit);
         if (!validation.isValid) {
-          error = validation.errorMessage;
+          errorMessage = validation.errorMessage;
         }
       }
 
       setState((prev) => ({
         ...prev,
         unixTimeInput: value,
-        unixTimeError: error,
+        unixTimeError: errorMessage,
       }));
     },
     [state.unit],
@@ -237,13 +236,13 @@ export function DateTimeConverter() {
   );
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 md:space-y-8">
       {/* 日時からUnix Timeへの変換 */}
-      <div className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-        <h3 className="mb-4 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+      <div className="rounded-lg border border-zinc-200 bg-white p-4 sm:p-6 dark:border-zinc-800 dark:bg-zinc-900">
+        <h3 className="mb-3 text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-50">
           {t("toUnixTime")}
         </h3>
-        <p className="mb-6 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mb-4 sm:mb-6 text-sm text-zinc-600 dark:text-zinc-400">
           {t("description.toUnixTime")}
         </p>
 
@@ -257,42 +256,47 @@ export function DateTimeConverter() {
             placeholder={t("placeholder.datetime")}
           />
 
-          {/* 形式選択 */}
-          <div className="flex flex-col gap-1">
-            <label
-              htmlFor="format-select"
-              className="text-sm font-medium text-zinc-700 dark:text-zinc-300"
-            >
-              {t("format")}
-            </label>
-            <select
-              id="format-select"
-              value={state.format}
-              onChange={handleFormatChange}
-              className="rounded border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50"
-            >
-              <option value="standard">{t("standard")}</option>
-              <option value="iso">{t("iso")}</option>
-            </select>
-          </div>
+          {/* 形式選択と単位選択 - レスポンシブグリッド */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* 形式選択 */}
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="format-select"
+                className="text-sm font-medium text-zinc-700 dark:text-zinc-300"
+              >
+                {t("format")}
+              </label>
+              <select
+                id="format-select"
+                value={state.format}
+                onChange={handleFormatChange}
+                className="rounded border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50 dark:focus:ring-offset-zinc-900"
+                aria-label={t("format")}
+              >
+                <option value="standard">{t("standard")}</option>
+                <option value="iso">{t("iso")}</option>
+              </select>
+            </div>
 
-          {/* 単位選択 */}
-          <div className="flex flex-col gap-1">
-            <label
-              htmlFor="unit-select"
-              className="text-sm font-medium text-zinc-700 dark:text-zinc-300"
-            >
-              {t("unit")}
-            </label>
-            <select
-              id="unit-select"
-              value={state.unit}
-              onChange={handleUnitChange}
-              className="rounded border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50"
-            >
-              <option value="seconds">{t("seconds")}</option>
-              <option value="milliseconds">{t("milliseconds")}</option>
-            </select>
+            {/* 単位選択 */}
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="unit-select"
+                className="text-sm font-medium text-zinc-700 dark:text-zinc-300"
+              >
+                {t("unit")}
+              </label>
+              <select
+                id="unit-select"
+                value={state.unit}
+                onChange={handleUnitChange}
+                className="rounded border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50 dark:focus:ring-offset-zinc-900"
+                aria-label={t("unit")}
+              >
+                <option value="seconds">{t("seconds")}</option>
+                <option value="milliseconds">{t("milliseconds")}</option>
+              </select>
+            </div>
           </div>
 
           {/* 変換ボタン */}
@@ -300,6 +304,7 @@ export function DateTimeConverter() {
             label={t("convert")}
             onClick={convertToUnixTime}
             variant="primary"
+            className="w-full sm:w-auto"
           />
 
           {/* Unix Time出力 */}
@@ -308,7 +313,7 @@ export function DateTimeConverter() {
               <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
                 {t("outputLabel")}:
               </p>
-              <p className="mt-1 font-mono text-lg text-zinc-900 dark:text-zinc-50">
+              <p className="mt-1 font-mono text-base sm:text-lg break-all text-zinc-900 dark:text-zinc-50">
                 {state.unixTimeInput}
               </p>
             </div>
@@ -317,11 +322,11 @@ export function DateTimeConverter() {
       </div>
 
       {/* Unix Timeから日時への変換 */}
-      <div className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-        <h3 className="mb-4 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+      <div className="rounded-lg border border-zinc-200 bg-white p-4 sm:p-6 dark:border-zinc-800 dark:bg-zinc-900">
+        <h3 className="mb-3 text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-50">
           {t("fromUnixTime")}
         </h3>
-        <p className="mb-6 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mb-4 sm:mb-6 text-sm text-zinc-600 dark:text-zinc-400">
           {t("description.fromUnixTime")}
         </p>
 
@@ -336,45 +341,50 @@ export function DateTimeConverter() {
             type="text"
           />
 
-          {/* 単位選択 */}
-          <div className="flex flex-col gap-1">
-            <label
-              htmlFor="unit-select-2"
-              className="text-sm font-medium text-zinc-700 dark:text-zinc-300"
-            >
-              {t("unit")}
-            </label>
-            <select
-              id="unit-select-2"
-              value={state.unit}
-              onChange={handleUnitChange}
-              className="rounded border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50"
-            >
-              <option value="seconds">{t("seconds")}</option>
-              <option value="milliseconds">{t("milliseconds")}</option>
-            </select>
-          </div>
+          {/* 単位選択とタイムゾーン選択 - レスポンシブグリッド */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* 単位選択 */}
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="unit-select-2"
+                className="text-sm font-medium text-zinc-700 dark:text-zinc-300"
+              >
+                {t("unit")}
+              </label>
+              <select
+                id="unit-select-2"
+                value={state.unit}
+                onChange={handleUnitChange}
+                className="rounded border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50 dark:focus:ring-offset-zinc-900"
+                aria-label={t("unit")}
+              >
+                <option value="seconds">{t("seconds")}</option>
+                <option value="milliseconds">{t("milliseconds")}</option>
+              </select>
+            </div>
 
-          {/* タイムゾーン選択 */}
-          <div className="flex flex-col gap-1">
-            <label
-              htmlFor="timezone-select"
-              className="text-sm font-medium text-zinc-700 dark:text-zinc-300"
-            >
-              {t("timezone")}
-            </label>
-            <select
-              id="timezone-select"
-              value={state.timezone}
-              onChange={handleTimezoneChange}
-              className="rounded border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50"
-            >
-              <option value="UTC">UTC</option>
-              <option value="Asia/Tokyo">Asia/Tokyo</option>
-              <option value="America/New_York">America/New_York</option>
-              <option value="Europe/London">Europe/London</option>
-              <option value="America/Los_Angeles">America/Los_Angeles</option>
-            </select>
+            {/* タイムゾーン選択 */}
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="timezone-select"
+                className="text-sm font-medium text-zinc-700 dark:text-zinc-300"
+              >
+                {t("timezone")}
+              </label>
+              <select
+                id="timezone-select"
+                value={state.timezone}
+                onChange={handleTimezoneChange}
+                className="rounded border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50 dark:focus:ring-offset-zinc-900"
+                aria-label={t("timezone")}
+              >
+                <option value="UTC">UTC</option>
+                <option value="Asia/Tokyo">Asia/Tokyo</option>
+                <option value="America/New_York">America/New_York</option>
+                <option value="Europe/London">Europe/London</option>
+                <option value="America/Los_Angeles">America/Los_Angeles</option>
+              </select>
+            </div>
           </div>
 
           {/* 形式選択 */}
@@ -389,7 +399,8 @@ export function DateTimeConverter() {
               id="format-select-2"
               value={state.format}
               onChange={handleFormatChange}
-              className="rounded border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50"
+              className="rounded border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50 dark:focus:ring-offset-zinc-900"
+              aria-label={t("format")}
             >
               <option value="standard">{t("standard")}</option>
               <option value="iso">{t("iso")}</option>
@@ -401,6 +412,7 @@ export function DateTimeConverter() {
             label={t("convert")}
             onClick={convertFromUnixTime}
             variant="primary"
+            className="w-full sm:w-auto"
           />
 
           {/* 日時出力 */}
@@ -409,7 +421,7 @@ export function DateTimeConverter() {
               <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
                 {t("outputLabel")}:
               </p>
-              <p className="mt-1 font-mono text-lg text-zinc-900 dark:text-zinc-50">
+              <p className="mt-1 font-mono text-base sm:text-lg break-all text-zinc-900 dark:text-zinc-50">
                 {state.datetimeInput}
               </p>
             </div>

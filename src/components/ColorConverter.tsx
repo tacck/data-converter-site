@@ -230,12 +230,16 @@ export function ColorConverter() {
 
       setState((prev) => ({
         ...prev,
-        rgb: { r: rgb.r.toString(), g: rgb.g.toString(), b: rgb.b.toString() },
+        rgb: {
+          r: rgb!.r.toString(),
+          g: rgb!.g.toString(),
+          b: rgb!.b.toString(),
+        },
         argb: {
           ...prev.argb,
-          r: rgb.r.toString(),
-          g: rgb.g.toString(),
-          b: rgb.b.toString(),
+          r: rgb!.r.toString(),
+          g: rgb!.g.toString(),
+          b: rgb!.b.toString(),
         },
         hex,
         cmyk: {
@@ -252,11 +256,10 @@ export function ColorConverter() {
         previewColor: hex,
         error: null,
       }));
-    } catch (error) {
+    } catch (err) {
       setState((prev) => ({
         ...prev,
-        error:
-          error instanceof Error ? error.message : tErrors("conversionError"),
+        error: err instanceof Error ? err.message : tErrors("conversionError"),
       }));
     }
   }, [
@@ -301,8 +304,10 @@ export function ColorConverter() {
         setTimeout(() => {
           setState((prev) => ({ ...prev, copySuccess: false }));
         }, 2000);
-      } catch (error) {
-        setState((prev) => ({ ...prev, error: tErrors("copyError") }));
+      } catch (err) {
+        const errorMessage =
+          err instanceof Error ? err.message : tErrors("copyError");
+        setState((prev) => ({ ...prev, error: errorMessage }));
       }
     },
     [state.rgb, state.argb, state.hex, state.hsl, tErrors],
@@ -311,22 +316,31 @@ export function ColorConverter() {
   // 初回レンダリング時に変換を実行
   useEffect(() => {
     convertColor();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* フォーマット選択 */}
-      <div className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-        <label className="mb-3 block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+      <div className="rounded-lg border border-zinc-200 bg-white p-4 sm:p-6 dark:border-zinc-800 dark:bg-zinc-900">
+        <label
+          id="format-label"
+          className="mb-3 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
+        >
           {t("format")}
         </label>
-        <div className="flex flex-wrap gap-2">
+        <div
+          role="group"
+          aria-labelledby="format-label"
+          className="flex flex-wrap gap-2"
+        >
           {(["rgb", "argb", "hex", "cmyk", "hsl"] as ColorFormat[]).map(
             (format) => (
               <button
                 key={format}
                 onClick={() => handleFormatChange(format)}
-                className={`rounded-md px-4 py-2 text-sm font-medium transition-colors ${
+                aria-pressed={state.format === format}
+                className={`rounded-md px-3 sm:px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900 ${
                   state.format === format
                     ? "bg-blue-600 text-white dark:bg-blue-500"
                     : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
@@ -343,9 +357,9 @@ export function ColorConverter() {
       <ColorPreview color={state.previewColor} />
 
       {/* 入力フィールド */}
-      <div className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="rounded-lg border border-zinc-200 bg-white p-4 sm:p-6 dark:border-zinc-800 dark:bg-zinc-900">
         {state.format === "rgb" && (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <InputField
               label={t("red")}
               value={state.rgb.r}
@@ -371,7 +385,7 @@ export function ColorConverter() {
         )}
 
         {state.format === "argb" && (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <InputField
               label={t("alpha")}
               value={state.argb.a}
@@ -414,7 +428,7 @@ export function ColorConverter() {
         )}
 
         {state.format === "cmyk" && (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <InputField
               label={t("cyan")}
               value={state.cmyk.c}
@@ -447,7 +461,7 @@ export function ColorConverter() {
         )}
 
         {state.format === "hsl" && (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <InputField
               label={t("hue")}
               value={state.hsl.h}
@@ -477,35 +491,40 @@ export function ColorConverter() {
             label={t("convert")}
             onClick={convertColor}
             variant="primary"
+            className="w-full sm:w-auto"
           />
         </div>
       </div>
 
       {/* 変換結果とCSSコピー */}
-      <div className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-        <h3 className="mb-4 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+      <div className="rounded-lg border border-zinc-200 bg-white p-4 sm:p-6 dark:border-zinc-800 dark:bg-zinc-900">
+        <h3 className="mb-3 sm:mb-4 text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-50">
           {t("copyCSS")}
         </h3>
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
           <Button
             label="RGB"
             onClick={() => copyToClipboard("rgb")}
             variant="secondary"
+            ariaLabel={`${t("copyCSS")} RGB`}
           />
           <Button
             label="RGBA"
             onClick={() => copyToClipboard("rgba")}
             variant="secondary"
+            ariaLabel={`${t("copyCSS")} RGBA`}
           />
           <Button
             label="HEX"
             onClick={() => copyToClipboard("hex")}
             variant="secondary"
+            ariaLabel={`${t("copyCSS")} HEX`}
           />
           <Button
             label="HSL"
             onClick={() => copyToClipboard("hsl")}
             variant="secondary"
+            ariaLabel={`${t("copyCSS")} HSL`}
           />
         </div>
 

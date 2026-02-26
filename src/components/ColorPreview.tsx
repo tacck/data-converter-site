@@ -15,12 +15,13 @@ export function ColorPreview({ color, className = "" }: ColorPreviewProps) {
         {t("preview")}
       </label>
       <div
-        className="h-32 w-full rounded-lg border-2 border-zinc-300 shadow-sm transition-colors dark:border-zinc-700"
+        className="h-24 sm:h-32 w-full rounded-lg border-2 border-zinc-300 shadow-sm transition-colors dark:border-zinc-700"
         style={{ backgroundColor: color }}
         data-testid="color-preview"
+        role="img"
         aria-label={`${t("preview")}: ${color}`}
       />
-      <p className="text-center text-sm text-zinc-600 dark:text-zinc-400">
+      <p className="text-center text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
         {color}
       </p>
     </div>
