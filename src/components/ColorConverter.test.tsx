@@ -56,7 +56,7 @@ describe("ColorConverter", () => {
 
   describe("フォーマット切り替え", () => {
     it("RGBフォーマットが初期選択されている", () => {
-      const { container } = render(<ColorConverter />);
+      render(<ColorConverter />);
 
       // RGB入力フィールドが表示されている
       const redInput = screen.getByLabelText("red");

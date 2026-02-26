@@ -4,7 +4,7 @@ import React from "react";
 export const useTranslations = (namespace?: string) => {
   return (key: string) => {
     // テスト用のメッセージを返す
-    const messages: Record<string, any> = {
+    const messages: Record<string, string> = {
       "datetime.title": "DateTime Converter",
       "datetime.toUnixTime": "DateTime to Unix Time",
       "datetime.fromUnixTime": "Unix Time to DateTime",
@@ -41,7 +41,7 @@ export const useTranslations = (namespace?: string) => {
 
 export const NextIntlClientProvider: React.FC<{
   locale: string;
-  messages: any;
+  messages: Record<string, string>;
   children: React.ReactNode;
 }> = ({ children }) => {
   return <>{children}</>;

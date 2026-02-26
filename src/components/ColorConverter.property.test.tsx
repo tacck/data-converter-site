@@ -9,7 +9,7 @@
 import React from "react";
 import { describe, it, expect } from "@jest/globals";
 import fc from "fast-check";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { ColorConverter } from "./ColorConverter";
 import { rgbToHex } from "@/lib/color-utils";
 
@@ -32,11 +32,8 @@ describe("ColorConverter - Property-Based Tests", () => {
           fc.integer({ min: 0, max: 255 }),
           fc.integer({ min: 0, max: 255 }),
           fc.integer({ min: 0, max: 255 }),
-          (r, g, b) => {
+          () => {
             const { container } = render(<ColorConverter />);
-
-            // 期待されるHEX値を計算
-            const expectedHex = rgbToHex(r, g, b);
 
             // プレビュー要素を取得
             const preview = container.querySelector(
@@ -69,7 +66,7 @@ describe("ColorConverter - Property-Based Tests", () => {
           fc.integer({ min: 0, max: 255 }),
           (r, g, b) => {
             // RGB値からHEX文字列を生成
-            const hex = rgbToHex(r, g, b);
+            rgbToHex(r, g, b);
             const { container } = render(<ColorConverter />);
 
             // プレビュー要素を取得
@@ -97,7 +94,7 @@ describe("ColorConverter - Property-Based Tests", () => {
             fc.integer({ min: -1000, max: -1 }),
             fc.integer({ min: 256, max: 1000 }),
           ),
-          (invalidValue) => {
+          () => {
             const { container } = render(<ColorConverter />);
 
             // コンポーネントが正常にレンダリングされることを確認
@@ -120,7 +117,7 @@ describe("ColorConverter - Property-Based Tests", () => {
             const cleanHex = s.replace(/^#/, "");
             return !/^[0-9A-Fa-f]{3}$|^[0-9A-Fa-f]{6}$/.test(cleanHex);
           }),
-          (invalidHex) => {
+          () => {
             const { container } = render(<ColorConverter />);
 
             // コンポーネントが正常にレンダリングされることを確認
@@ -140,7 +137,7 @@ describe("ColorConverter - Property-Based Tests", () => {
             fc.double({ min: -100, max: -0.1 }),
             fc.double({ min: 100.1, max: 200 }),
           ),
-          (invalidValue) => {
+          () => {
             const { container } = render(<ColorConverter />);
 
             // コンポーネントが正常にレンダリングされることを確認
@@ -170,7 +167,7 @@ describe("ColorConverter - Property-Based Tests", () => {
               fc.double({ min: 100.1, max: 200 }),
             ),
           }),
-          (invalidHsl) => {
+          () => {
             const { container } = render(<ColorConverter />);
 
             // コンポーネントが正常にレンダリングされることを確認
@@ -185,7 +182,7 @@ describe("ColorConverter - Property-Based Tests", () => {
 
     it("任意のNaN値に対して、エラーを発生させる", () => {
       fc.assert(
-        fc.property(fc.constant(NaN), (nanValue) => {
+        fc.property(fc.constant(NaN), () => {
           const { container } = render(<ColorConverter />);
 
           // コンポーネントが正常にレンダリングされることを確認

@@ -22,6 +22,9 @@ export default defineConfig({
   webServer: {
     command: "npm run dev",
     url: "http://localhost:3000",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: true, // 既存のサーバーを再利用
+    timeout: 120 * 1000,
+    stdout: "ignore",
+    stderr: "pipe",
   },
 });

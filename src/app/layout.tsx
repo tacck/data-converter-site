@@ -1,7 +1,5 @@
-import { redirect } from "next/navigation";
-import { routing } from "@/i18n/routing";
+import type { ReactNode } from "react";
 
-export default function RootLayout() {
-  // ルートパスへのアクセスをデフォルトロケールにリダイレクト
-  redirect(`/${routing.defaultLocale}`);
+export default function RootLayout({ children }: { children: ReactNode }) {
+  return children;
 }

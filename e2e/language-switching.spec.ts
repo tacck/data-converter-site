@@ -74,7 +74,7 @@ test.describe("Language Switching", () => {
 
     // URLとUIが英語であることを確認
     await expect(page).toHaveURL(/\/en\/color/);
-    await expect(page.locator("h2")).toContainText(/Color Converter/i);
+    await expect(page.locator("h2")).toContainText(/Color Code Converter/i);
   });
 
   test("should display error messages in selected language", async ({
@@ -93,8 +93,8 @@ test.describe("Language Switching", () => {
     // 変換ボタンをクリック
     await page.locator('button:has-text("変換")').first().click();
 
-    // 日本語のエラーメッセージを確認
-    const error = page.locator('[role="alert"]');
+    // 日本語のエラーメッセージを確認（最初のalert要素）
+    const error = page.locator('[role="alert"]').first();
     await expect(error).toBeVisible();
   });
 
@@ -161,13 +161,13 @@ test.describe("Language Switching", () => {
     await page.waitForLoadState("networkidle");
 
     // 英語のUIを確認
-    await expect(page.locator("h2")).toContainText(/Color Converter/i);
+    await expect(page.locator("h2")).toContainText(/Color Code Converter/i);
 
     // 言語を日本語に切り替え
     await page.selectOption("#language-select", "ja");
 
     // 日本語ページにリダイレクトされることを確認
     await page.waitForURL(/\/ja\/color/);
-    await expect(page.locator("h2")).toContainText(/カラー変換/);
+    await expect(page.locator("h2")).toContainText(/カラーコード変換/);
   });
 });

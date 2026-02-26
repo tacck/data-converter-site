@@ -207,7 +207,7 @@ test.describe("Color Conversion", () => {
 
     // RGB形式でコピー
     await page.locator('button:has-text("RGB")').last().click();
-    let successMessage = page.locator('[role="alert"]').last();
+    const successMessage = page.locator('[role="alert"]').last();
     await expect(successMessage).toBeVisible();
 
     // 少し待機
