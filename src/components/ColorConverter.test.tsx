@@ -39,7 +39,7 @@ describe("ColorConverter", () => {
       ) as HTMLElement;
 
       expect(preview).toBeTruthy();
-      expect(preview.style.backgroundColor).toBe("#FF0000");
+      expect(preview.style.backgroundColor).toBe("rgb(255, 0, 0)");
     });
 
     it("すべてのフォーマットボタンが表示される", () => {
@@ -138,7 +138,7 @@ describe("ColorConverter", () => {
         const preview = container.querySelector(
           '[data-testid="color-preview"]',
         ) as HTMLElement;
-        expect(preview.style.backgroundColor).toBe("#0000FF");
+        expect(preview.style.backgroundColor).toBe("rgb(0, 0, 255)");
       });
     });
 
@@ -162,7 +162,7 @@ describe("ColorConverter", () => {
         const preview = container.querySelector(
           '[data-testid="color-preview"]',
         ) as HTMLElement;
-        expect(preview.style.backgroundColor).toBe("#00FF00");
+        expect(preview.style.backgroundColor).toBe("rgb(0, 255, 0)");
       });
     });
 
@@ -186,7 +186,7 @@ describe("ColorConverter", () => {
         const preview = container.querySelector(
           '[data-testid="color-preview"]',
         ) as HTMLElement;
-        expect(preview.style.backgroundColor).toBe("#000000");
+        expect(preview.style.backgroundColor).toBe("rgb(0, 0, 0)");
       });
     });
 
@@ -210,7 +210,7 @@ describe("ColorConverter", () => {
         const preview = container.querySelector(
           '[data-testid="color-preview"]',
         ) as HTMLElement;
-        expect(preview.style.backgroundColor).toBe("#FFFFFF");
+        expect(preview.style.backgroundColor).toBe("rgb(255, 255, 255)");
       });
     });
   });
@@ -235,7 +235,7 @@ describe("ColorConverter", () => {
         const preview = container.querySelector(
           '[data-testid="color-preview"]',
         ) as HTMLElement;
-        expect(preview.style.backgroundColor).toBe("#00FF00");
+        expect(preview.style.backgroundColor).toBe("rgb(0, 255, 0)");
       });
     });
   });
@@ -253,8 +253,11 @@ describe("ColorConverter", () => {
       fireEvent.click(convertButton);
 
       await waitFor(() => {
-        const errorElement = screen.getByRole("alert");
-        expect(errorElement).toBeTruthy();
+        const errorElements = screen.getAllByRole("alert");
+        expect(errorElements.length).toBeGreaterThan(0);
+        expect(
+          errorElements.some((el) => el.textContent?.includes("invalidRGB")),
+        ).toBe(true);
       });
     });
 
@@ -270,8 +273,11 @@ describe("ColorConverter", () => {
       fireEvent.click(convertButton);
 
       await waitFor(() => {
-        const errorElement = screen.getByRole("alert");
-        expect(errorElement).toBeTruthy();
+        const errorElements = screen.getAllByRole("alert");
+        expect(errorElements.length).toBeGreaterThan(0);
+        expect(
+          errorElements.some((el) => el.textContent?.includes("invalidRGB")),
+        ).toBe(true);
       });
     });
 
@@ -291,8 +297,11 @@ describe("ColorConverter", () => {
       fireEvent.click(convertButton);
 
       await waitFor(() => {
-        const errorElement = screen.getByRole("alert");
-        expect(errorElement).toBeTruthy();
+        const errorElements = screen.getAllByRole("alert");
+        expect(errorElements.length).toBeGreaterThan(0);
+        expect(
+          errorElements.some((el) => el.textContent?.includes("invalidHex")),
+        ).toBe(true);
       });
     });
   });

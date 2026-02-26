@@ -349,21 +349,21 @@ export function ColorConverter() {
             <InputField
               label={t("red")}
               value={state.rgb.r}
-              onChange={(e) => handleRgbChange("r", e.target.value)}
+              onChange={(value) => handleRgbChange("r", value)}
               placeholder={t("placeholder.rgb")}
               error={state.error || ""}
             />
             <InputField
               label={t("green")}
               value={state.rgb.g}
-              onChange={(e) => handleRgbChange("g", e.target.value)}
+              onChange={(value) => handleRgbChange("g", value)}
               placeholder={t("placeholder.rgb")}
               error={state.error || ""}
             />
             <InputField
               label={t("blue")}
               value={state.rgb.b}
-              onChange={(e) => handleRgbChange("b", e.target.value)}
+              onChange={(value) => handleRgbChange("b", value)}
               placeholder={t("placeholder.rgb")}
               error={state.error || ""}
             />
@@ -375,28 +375,28 @@ export function ColorConverter() {
             <InputField
               label={t("alpha")}
               value={state.argb.a}
-              onChange={(e) => handleArgbChange("a", e.target.value)}
+              onChange={(value) => handleArgbChange("a", value)}
               placeholder={t("placeholder.alpha")}
               error={state.error || ""}
             />
             <InputField
               label={t("red")}
               value={state.argb.r}
-              onChange={(e) => handleArgbChange("r", e.target.value)}
+              onChange={(value) => handleArgbChange("r", value)}
               placeholder={t("placeholder.rgb")}
               error={state.error || ""}
             />
             <InputField
               label={t("green")}
               value={state.argb.g}
-              onChange={(e) => handleArgbChange("g", e.target.value)}
+              onChange={(value) => handleArgbChange("g", value)}
               placeholder={t("placeholder.rgb")}
               error={state.error || ""}
             />
             <InputField
               label={t("blue")}
               value={state.argb.b}
-              onChange={(e) => handleArgbChange("b", e.target.value)}
+              onChange={(value) => handleArgbChange("b", value)}
               placeholder={t("placeholder.rgb")}
               error={state.error || ""}
             />
@@ -407,7 +407,7 @@ export function ColorConverter() {
           <InputField
             label={t("hex")}
             value={state.hex}
-            onChange={(e) => handleHexChange(e.target.value)}
+            onChange={(value) => handleHexChange(value)}
             placeholder={t("placeholder.hex")}
             error={state.error || ""}
           />
@@ -418,28 +418,28 @@ export function ColorConverter() {
             <InputField
               label={t("cyan")}
               value={state.cmyk.c}
-              onChange={(e) => handleCmykChange("c", e.target.value)}
+              onChange={(value) => handleCmykChange("c", value)}
               placeholder={t("placeholder.cmyk")}
               error={state.error || ""}
             />
             <InputField
               label={t("magenta")}
               value={state.cmyk.m}
-              onChange={(e) => handleCmykChange("m", e.target.value)}
+              onChange={(value) => handleCmykChange("m", value)}
               placeholder={t("placeholder.cmyk")}
               error={state.error || ""}
             />
             <InputField
               label={t("yellow")}
               value={state.cmyk.y}
-              onChange={(e) => handleCmykChange("y", e.target.value)}
+              onChange={(value) => handleCmykChange("y", value)}
               placeholder={t("placeholder.cmyk")}
               error={state.error || ""}
             />
             <InputField
               label={t("key")}
               value={state.cmyk.k}
-              onChange={(e) => handleCmykChange("k", e.target.value)}
+              onChange={(value) => handleCmykChange("k", value)}
               placeholder={t("placeholder.cmyk")}
               error={state.error || ""}
             />
@@ -451,21 +451,21 @@ export function ColorConverter() {
             <InputField
               label={t("hue")}
               value={state.hsl.h}
-              onChange={(e) => handleHslChange("h", e.target.value)}
+              onChange={(value) => handleHslChange("h", value)}
               placeholder={t("placeholder.hue")}
               error={state.error || ""}
             />
             <InputField
               label={t("saturation")}
               value={state.hsl.s}
-              onChange={(e) => handleHslChange("s", e.target.value)}
+              onChange={(value) => handleHslChange("s", value)}
               placeholder={t("placeholder.percent")}
               error={state.error || ""}
             />
             <InputField
               label={t("lightness")}
               value={state.hsl.l}
-              onChange={(e) => handleHslChange("l", e.target.value)}
+              onChange={(value) => handleHslChange("l", value)}
               placeholder={t("placeholder.percent")}
               error={state.error || ""}
             />

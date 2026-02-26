@@ -64,9 +64,12 @@ describe("ColorConverter - Property-Based Tests", () => {
     it("任意の有効なHEX値に対して、プレビュー色は入力されたHEX値と一致する", () => {
       fc.assert(
         fc.property(
-          fc.hexaString({ minLength: 6, maxLength: 6 }),
-          (hexValue) => {
-            const hex = `#${hexValue}`;
+          fc.integer({ min: 0, max: 255 }),
+          fc.integer({ min: 0, max: 255 }),
+          fc.integer({ min: 0, max: 255 }),
+          (r, g, b) => {
+            // RGB値からHEX文字列を生成
+            const hex = rgbToHex(r, g, b);
             const { container } = render(<ColorConverter />);
 
             // プレビュー要素を取得
