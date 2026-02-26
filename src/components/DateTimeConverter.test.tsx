@@ -112,8 +112,9 @@ describe("DateTimeConverter", () => {
 
       // Unix Time入力フィールドに結果が設定されることを確認（値は環境のタイムゾーンに依存）
       const unixTimeInputs = screen.getAllByLabelText("Unix Time");
-      expect(unixTimeInputs[0].value).toMatch(/^\d+$/);
-      expect(parseInt(unixTimeInputs[0].value)).toBeGreaterThan(0);
+      const unixTimeInput = unixTimeInputs[0] as HTMLInputElement;
+      expect(unixTimeInput.value).toMatch(/^\d+$/);
+      expect(parseInt(unixTimeInput.value)).toBeGreaterThan(0);
     });
 
     // Requirement 1.2: ISO形式の変換
@@ -139,8 +140,9 @@ describe("DateTimeConverter", () => {
 
       // Unix Time入力フィールドに結果が設定されることを確認
       const unixTimeInputs = screen.getAllByLabelText("Unix Time");
-      expect(unixTimeInputs[0].value).toMatch(/^\d+$/);
-      expect(parseInt(unixTimeInputs[0].value)).toBeGreaterThan(0);
+      const unixTimeInput = unixTimeInputs[0] as HTMLInputElement;
+      expect(unixTimeInput.value).toMatch(/^\d+$/);
+      expect(parseInt(unixTimeInput.value)).toBeGreaterThan(0);
     });
 
     // Requirement 1.4: ミリ秒単位の変換
@@ -166,9 +168,10 @@ describe("DateTimeConverter", () => {
 
       // ミリ秒単位のUnix Timeが入力フィールドに設定されることを確認
       const unixTimeInputs = screen.getAllByLabelText("Unix Time");
-      expect(unixTimeInputs[0].value).toMatch(/^\d+$/);
+      const unixTimeInput = unixTimeInputs[0] as HTMLInputElement;
+      expect(unixTimeInput.value).toMatch(/^\d+$/);
       // ミリ秒なので秒の1000倍
-      expect(parseInt(unixTimeInputs[0].value)).toBeGreaterThan(1000000000000);
+      expect(parseInt(unixTimeInput.value)).toBeGreaterThan(1000000000000);
     });
 
     // エッジケース: エポックタイム
@@ -187,7 +190,8 @@ describe("DateTimeConverter", () => {
 
       // Unix Time入力フィールドに値が設定されることを確認（タイムゾーンにより異なる）
       const unixTimeInputs = screen.getAllByLabelText("Unix Time");
-      expect(unixTimeInputs[0].value).toMatch(/^-?\d+$/);
+      const unixTimeInput = unixTimeInputs[0] as HTMLInputElement;
+      expect(unixTimeInput.value).toMatch(/^-?\d+$/);
     });
   });
 
@@ -401,7 +405,8 @@ describe("DateTimeConverter", () => {
 
       // Unix Time入力フィールドに結果が設定されることを確認
       const unixTimeInputs = screen.getAllByLabelText("Unix Time");
-      const secondsValue = parseInt(unixTimeInputs[0].value);
+      const unixTimeInput = unixTimeInputs[0] as HTMLInputElement;
+      const secondsValue = parseInt(unixTimeInput.value);
       expect(secondsValue).toBeGreaterThan(0);
 
       // 単位をミリ秒に変更
@@ -410,7 +415,7 @@ describe("DateTimeConverter", () => {
 
       // 再度変換
       fireEvent.click(convertButtons[0]);
-      const millisecondsValue = parseInt(unixTimeInputs[0].value);
+      const millisecondsValue = parseInt(unixTimeInput.value);
 
       // ミリ秒は秒の1000倍
       expect(millisecondsValue).toBe(secondsValue * 1000);
