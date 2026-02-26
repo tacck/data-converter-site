@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { InputField } from "./InputField";
 import { Button } from "./Button";
@@ -49,6 +49,12 @@ export function ColorConverter() {
   const handleFormatChange = useCallback((format: ColorFormat) => {
     setState((prev) => ({ ...prev, format, error: null }));
   }, []);
+
+  // フォーマットリストをメモ化
+  const formatList = useMemo<ColorFormat[]>(
+    () => ["rgb", "argb", "hex", "cmyk", "hsl"],
+    [],
+  );
 
   // RGB値の変更
   const handleRgbChange = useCallback(
@@ -272,31 +278,29 @@ export function ColorConverter() {
     tErrors,
   ]);
 
+  // CSS文字列をメモ化
+  const cssStrings = useMemo(() => {
+    const r = parseInt(state.rgb.r) || 0;
+    const g = parseInt(state.rgb.g) || 0;
+    const b = parseInt(state.rgb.b) || 0;
+    const a = parseInt(state.argb.a) || 255;
+    const h = parseFloat(state.hsl.h) || 0;
+    const s = parseFloat(state.hsl.s) || 0;
+    const l = parseFloat(state.hsl.l) || 0;
+
+    return {
+      rgb: formatCss({ rgb: { r, g, b } }, "rgb"),
+      rgba: formatCss({ argb: { a, r, g, b } }, "rgba"),
+      hex: formatCss({ hex: state.hex }, "hex"),
+      hsl: formatCss({ hsl: { h, s, l } }, "hsl"),
+    };
+  }, [state.rgb, state.argb, state.hex, state.hsl]);
+
   // CSSコピー機能
   const copyToClipboard = useCallback(
     async (format: "rgb" | "rgba" | "hex" | "hsl") => {
       try {
-        let cssString = "";
-
-        if (format === "rgb") {
-          const r = parseInt(state.rgb.r);
-          const g = parseInt(state.rgb.g);
-          const b = parseInt(state.rgb.b);
-          cssString = formatCss({ rgb: { r, g, b } }, "rgb");
-        } else if (format === "rgba") {
-          const a = parseInt(state.argb.a);
-          const r = parseInt(state.argb.r);
-          const g = parseInt(state.argb.g);
-          const b = parseInt(state.argb.b);
-          cssString = formatCss({ argb: { a, r, g, b } }, "rgba");
-        } else if (format === "hex") {
-          cssString = formatCss({ hex: state.hex }, "hex");
-        } else if (format === "hsl") {
-          const h = parseFloat(state.hsl.h);
-          const s = parseFloat(state.hsl.s);
-          const l = parseFloat(state.hsl.l);
-          cssString = formatCss({ hsl: { h, s, l } }, "hsl");
-        }
+        const cssString = cssStrings[format];
 
         await navigator.clipboard.writeText(cssString);
         setState((prev) => ({ ...prev, copySuccess: true }));
@@ -310,7 +314,7 @@ export function ColorConverter() {
         setState((prev) => ({ ...prev, error: errorMessage }));
       }
     },
-    [state.rgb, state.argb, state.hex, state.hsl, tErrors],
+    [cssStrings, tErrors],
   );
 
   // 初回レンダリング時に変換を実行
@@ -334,22 +338,20 @@ export function ColorConverter() {
           aria-labelledby="format-label"
           className="flex flex-wrap gap-2"
         >
-          {(["rgb", "argb", "hex", "cmyk", "hsl"] as ColorFormat[]).map(
-            (format) => (
-              <button
-                key={format}
-                onClick={() => handleFormatChange(format)}
-                aria-pressed={state.format === format}
-                className={`rounded-md px-3 sm:px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900 ${
-                  state.format === format
-                    ? "bg-blue-600 text-white dark:bg-blue-500"
-                    : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
-                }`}
-              >
-                {t(format)}
-              </button>
-            ),
-          )}
+          {formatList.map((format) => (
+            <button
+              key={format}
+              onClick={() => handleFormatChange(format)}
+              aria-pressed={state.format === format}
+              className={`rounded-md px-3 sm:px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900 ${
+                state.format === format
+                  ? "bg-blue-600 text-white dark:bg-blue-500"
+                  : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
+              }`}
+            >
+              {t(format)}
+            </button>
+          ))}
         </div>
       </div>
 
