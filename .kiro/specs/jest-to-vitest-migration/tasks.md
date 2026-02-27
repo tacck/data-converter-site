@@ -84,7 +84,7 @@
     - `npm run test src/components/Button.test.tsx` を実行
     - テストがパスすることを確認
     - _Requirements: 7.1, 7.2_
-  - [ ] 6.2 全テストの実行
+  - [x] 6.2 全テストの実行
     - `npm run test` を実行
     - 14個のテストファイルすべてが実行されることを確認
     - すべてのテストケースが成功することを確認
