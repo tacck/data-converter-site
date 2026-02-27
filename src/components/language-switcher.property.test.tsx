@@ -5,6 +5,7 @@
  * 普遍的なプロパティを検証します。
  */
 
+import { describe, it, expect, beforeEach } from "vitest";
 import fc from "fast-check";
 
 // next-intlのroutingをモック

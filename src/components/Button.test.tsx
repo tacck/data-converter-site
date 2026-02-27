@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, it, expect, jest } from "@jest/globals";
+import { describe, it, expect, vi } from "vitest";
 import { Button } from "./Button";
 
 describe("Button", () => {
@@ -13,7 +13,7 @@ describe("Button", () => {
     });
 
     it("クリック時にonClickハンドラを呼び出す", () => {
-      const handleClick = jest.fn();
+      const handleClick = vi.fn();
       render(<Button label="クリック" onClick={handleClick} />);
 
       fireEvent.click(screen.getByRole("button"));
@@ -60,7 +60,7 @@ describe("Button", () => {
     });
 
     it("無効化時はonClickハンドラを呼び出さない", () => {
-      const handleClick = jest.fn();
+      const handleClick = vi.fn();
       render(<Button label="無効" onClick={handleClick} disabled />);
 
       fireEvent.click(screen.getByRole("button"));
@@ -70,7 +70,7 @@ describe("Button", () => {
 
   describe("アクセシビリティ - 要件8.2: キーボード操作", () => {
     it("Enterキーでボタンを実行する", () => {
-      const handleClick = jest.fn();
+      const handleClick = vi.fn();
       render(<Button label="Enter" onClick={handleClick} />);
 
       fireEvent.keyDown(screen.getByRole("button"), { key: "Enter" });
@@ -78,7 +78,7 @@ describe("Button", () => {
     });
 
     it("Spaceキーでボタンを実行する", () => {
-      const handleClick = jest.fn();
+      const handleClick = vi.fn();
       render(<Button label="Space" onClick={handleClick} />);
 
       fireEvent.keyDown(screen.getByRole("button"), { key: " " });
@@ -86,7 +86,7 @@ describe("Button", () => {
     });
 
     it("無効化時はキーボード操作でonClickハンドラを呼び出さない", () => {
-      const handleClick = jest.fn();
+      const handleClick = vi.fn();
       render(<Button label="無効" onClick={handleClick} disabled />);
 
       fireEvent.keyDown(screen.getByRole("button"), { key: "Enter" });
@@ -95,7 +95,7 @@ describe("Button", () => {
     });
 
     it("その他のキーでは実行しない", () => {
-      const handleClick = jest.fn();
+      const handleClick = vi.fn();
       render(<Button label="Other" onClick={handleClick} />);
 
       fireEvent.keyDown(screen.getByRole("button"), { key: "a" });

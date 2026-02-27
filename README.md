@@ -1,24 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Data Converter Site
+
+シンプルなデータ変換機能を提供するWebアプリケーション。
+
+## 主要機能
+
+- **日時変換**: Unix Time(エポックタイム)と一般的な日時形式の相互変換
+- **カラーコード変換**: RGB、ARGB、CMYK、HSL形式の相互変換
 
 ## Getting Started
 
-First, run the development server:
+開発サーバーを起動:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてアプリケーションを確認できます。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## テスト
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+このプロジェクトは [Vitest](https://vitest.dev/) を使用してテストを実行します。
+
+### テストコマンド
+
+```bash
+# すべてのテストを1回実行
+npm run test
+
+# ウォッチモードでテストを実行（ファイル変更時に自動再実行）
+npm run test:watch
+
+# カバレッジレポートを生成
+npm run test:coverage
+
+# UIモードでテストを実行（ブラウザベースのインターフェース）
+npm run test:ui
+
+# E2Eテストを実行（Playwright）
+npm run test:e2e
+npm run test:e2e:ui
+npm run test:e2e:headed
+```
+
+### テストの種類
+
+- **単体テスト**: コンポーネントとユーティリティ関数のテスト（14ファイル、264テストケース）
+- **プロパティベーステスト**: [fast-check](https://github.com/dubzzz/fast-check)を使用した網羅的テスト
+- **パフォーマンステスト**: 処理時間の測定とパフォーマンス回帰の検出
+- **E2Eテスト**: [Playwright](https://playwright.dev/)を使用したエンドツーエンドテスト
+
+### Vitestの特徴
+
+- **高速**: Viteベースの高速なテスト実行
+- **ウォッチモード**: ファイル変更時の自動再実行
+- **UIモード**: ブラウザベースのテストインターフェース
+- **TypeScript対応**: ネイティブTypeScriptサポート
+- **カバレッジ**: v8カバレッジプロバイダーによる詳細な分析
+
+詳細は [docs/vitest-migration-report.md](docs/vitest-migration-report.md) を参照してください。
 
 ## Learn More
 

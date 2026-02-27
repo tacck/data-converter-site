@@ -1,11 +1,11 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, it, expect, jest } from "@jest/globals";
+import { describe, it, expect, vi } from "vitest";
 import { InputField } from "./InputField";
 
 describe("InputField", () => {
   it("ラベルと入力フィールドが正しく表示される", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<InputField label="テストラベル" value="" onChange={onChange} />);
 
     // ラベルが表示されている
@@ -17,7 +17,7 @@ describe("InputField", () => {
   });
 
   it("入力値が変更されるとonChangeが呼ばれる", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<InputField label="テストラベル" value="" onChange={onChange} />);
 
     const input = screen.getByLabelText("テストラベル");
@@ -27,7 +27,7 @@ describe("InputField", () => {
   });
 
   it("エラーメッセージが表示される", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <InputField
         label="テストラベル"
@@ -49,7 +49,7 @@ describe("InputField", () => {
   });
 
   it("エラー状態の入力フィールドにaria-invalid属性が設定される", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <InputField
         label="テストラベル"
@@ -66,7 +66,7 @@ describe("InputField", () => {
   });
 
   it("エラー状態の入力フィールドがaria-describedbyでエラーメッセージと関連付けられる", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <InputField
         label="テストラベル"
@@ -88,7 +88,7 @@ describe("InputField", () => {
   });
 
   it("エラーがない場合、aria-invalidはfalseになる", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<InputField label="テストラベル" value="" onChange={onChange} />);
 
     const input = screen.getByLabelText("テストラベル");
@@ -98,7 +98,7 @@ describe("InputField", () => {
   });
 
   it("プレースホルダーが表示される", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <InputField
         label="テストラベル"
@@ -113,7 +113,7 @@ describe("InputField", () => {
   });
 
   it("disabled状態が正しく反映される", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <InputField
         label="テストラベル"
@@ -128,7 +128,7 @@ describe("InputField", () => {
   });
 
   it("type属性が正しく設定される", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <InputField
         label="テストラベル"
@@ -143,7 +143,7 @@ describe("InputField", () => {
   });
 
   it("カスタムIDが指定された場合、そのIDが使用される", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <InputField
         label="テストラベル"
