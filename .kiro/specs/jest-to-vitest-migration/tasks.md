@@ -18,14 +18,14 @@
     - テスト数、カバレッジを記録
     - _Requirements: 移行前後の比較データ取得_
 
-- [ ] 2. フェーズ2: 依存関係更新（推定時間: 10分）
-  - [ ] 2.1 Jest関連パッケージの削除
+- [x] 2. フェーズ2: 依存関係更新（推定時間: 10分）
+  - [x] 2.1 Jest関連パッケージの削除
     - `npm uninstall jest @types/jest jest-environment-jsdom ts-jest` を実行
     - _Requirements: 1.5, 1.6, 1.7, 1.8_
-  - [ ] 2.2 Vitest関連パッケージの追加
+  - [x] 2.2 Vitest関連パッケージの追加
     - `npm install -D vitest @vitest/ui @vitest/coverage-v8 jsdom` を実行
     - _Requirements: 1.1, 1.2, 1.3, 1.4_
-  - [ ] 2.3 package.jsonの依存関係確認
+  - [x] 2.3 package.jsonの依存関係確認
     - Vitestパッケージが追加されていることを確認
     - Jestパッケージが削除されていることを確認
     - @testing-library/react、@testing-library/jest-dom、fast-checkが保持されていることを確認
