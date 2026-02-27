@@ -7,14 +7,14 @@
  */
 
 import React from "react";
-import { describe, it, expect } from "@jest/globals";
+import { describe, it, expect, vi } from "vitest";
 import fc from "fast-check";
 import { render } from "@testing-library/react";
 import { ColorConverter } from "./ColorConverter";
 import { rgbToHex } from "@/lib/color-utils";
 
 // next-intlのモック
-jest.mock("next-intl", () => ({
+vi.mock("next-intl", () => ({
   useTranslations: () => (key: string) => key,
 }));
 

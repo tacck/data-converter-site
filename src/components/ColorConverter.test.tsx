@@ -5,25 +5,25 @@
  */
 
 import React from "react";
-import { describe, it, expect, jest, beforeEach } from "@jest/globals";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { ColorConverter } from "./ColorConverter";
 
 // next-intlのモック
-jest.mock("next-intl", () => ({
+vi.mock("next-intl", () => ({
   useTranslations: () => (key: string) => key,
 }));
 
 // クリップボードAPIのモック
 Object.assign(navigator, {
   clipboard: {
-    writeText: jest.fn(() => Promise.resolve()),
+    writeText: vi.fn(() => Promise.resolve()),
   },
 });
 
 describe("ColorConverter", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe("初期レンダリング", () => {
