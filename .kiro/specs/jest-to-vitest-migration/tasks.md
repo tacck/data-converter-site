@@ -62,7 +62,7 @@
     - `@testing-library/jest-dom` の直接インポートを削除
     - 対象: Button.test.tsx, ColorConverter.test.tsx, ColorConverter.property.test.tsx, DateTimeConverter.test.tsx, DateTimeConverter.property.test.tsx, InputField.test.tsx, language-switcher.property.test.tsx
     - _Requirements: 5.1, 5.2, 5.3_
-  - [ ] 4.2 ユーティリティテストファイルの変換（7ファイル）
+  - [x] 4.2 ユーティリティテストファイルの変換（7ファイル）
     - import文を `vitest` に変更
     - `jest.fn()` → `vi.fn()` に置換
     - `jest.mock()` → `vi.mock()` に置換
