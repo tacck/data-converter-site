@@ -69,7 +69,7 @@
     - `jest.spyOn()` → `vi.spyOn()` に置換
     - 対象: color-utils.test.ts, color-utils.property.test.ts, color-utils.performance.test.ts, datetime-utils.test.ts, datetime-utils.property.test.ts, datetime-utils.performance.test.ts, validation-utils.test.ts
     - _Requirements: 5.1, 5.2, 5.3_
-  - [ ] 4.3 next-intlモックの確認
+  - [x] 4.3 next-intlモックの確認
     - `src/__mocks__/next-intl` ディレクトリが保持されていることを確認
     - モック実装がVitest互換であることを確認
     - _Requirements: 6.1, 6.3_
