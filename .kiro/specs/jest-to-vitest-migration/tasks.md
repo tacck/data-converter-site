@@ -31,24 +31,24 @@
     - @testing-library/react、@testing-library/jest-dom、fast-checkが保持されていることを確認
     - _Requirements: 1.9, 1.10, 1.11_
 
-- [ ] 3. フェーズ3: 設定ファイル作成（推定時間: 20分）
-  - [ ] 3.1 vitest.config.ts の作成
+- [x] 3. フェーズ3: 設定ファイル作成（推定時間: 20分）
+  - [x] 3.1 vitest.config.ts の作成
     - プロジェクトルートに `vitest.config.ts` を作成
     - 設定内容: environment: jsdom, globals: true, setupFiles, coverage設定, next-intl inline設定
     - パスエイリアス `@/*` を `./src/*` にマッピング
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 2.10, 6.2_
-  - [ ] 3.2 vitest.setup.ts の作成
+  - [x] 3.2 vitest.setup.ts の作成
     - プロジェクトルートに `vitest.setup.ts` を作成
     - `@testing-library/jest-dom/vitest` をインポート
     - _Requirements: 3.1, 3.2_
-  - [ ] 3.3 package.json スクリプトの更新
+  - [x] 3.3 package.json スクリプトの更新
     - `"test": "vitest --run"` に更新
     - `"test:watch": "vitest"` に更新
     - `"test:coverage": "vitest --coverage"` に更新
     - `"test:ui": "vitest --ui"` を追加
     - E2Eテストスクリプトは変更しない
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7_
-  - [ ] 3.4 .kiro/specs/jest-to-vitest-migration/.config.kiro の作成
+  - [x] 3.4 .kiro/specs/jest-to-vitest-migration/.config.kiro の作成
     - 設定ファイルを作成
     - specId、workflowType、specTypeを設定
     - _Requirements: ワークフロー管理_
